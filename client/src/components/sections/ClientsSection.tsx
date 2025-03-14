@@ -58,7 +58,7 @@ export default function ClientsSection() {
               <div className="bg-white rounded-xl p-6 shadow-sm flex items-center justify-center h-48">
                 <div className="text-center">
                   <img 
-                    src="/assets/BRAND-MARK-1.png" 
+                    src="/assets/extem-logo.png" 
                     alt="Extem Education" 
                     className="h-16 md:h-20 w-auto mx-auto"
                   />
