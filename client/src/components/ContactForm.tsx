@@ -52,7 +52,7 @@ export default function ContactForm() {
       formData.append("subject", values.subject);
       formData.append("message", values.message);
   
-      const response = await fetch("https://formsubmit.co/contact@zedtechlab.com", {
+      const response = await fetch("https://formsubmit.co/zedtechlabs@gmail.com,contact@zedtechlab.com", {
         method: "POST",
         body: formData,
       });
