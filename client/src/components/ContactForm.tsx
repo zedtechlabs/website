@@ -45,25 +45,34 @@ export default function ContactForm() {
 
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
-      const response = await apiRequest("POST", "/api/contact", values);
+      const response = await fetch("https://formsubmit.co/contact@zedtechlab.com,zedtechlabs@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to send message.");
+      }
       return response.json();
     },
     onSuccess: () => {
       toast({
         title: "Message sent!",
-        description: "We'll get back to you as soon as possible.",
+        description: "We've received your message and will respond soon.",
         variant: "default",
       });
       form.reset();
     },
     onError: (error) => {
       toast({
-        title: "Something went wrong",
+        title: "Error sending message",
         description: error.message || "Please try again later.",
         variant: "destructive",
       });
     },
   });
+  
 
   const onSubmit = (values: FormValues) => {
     mutation.mutate(values);

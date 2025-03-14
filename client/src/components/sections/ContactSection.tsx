@@ -64,14 +64,14 @@ export default function ContactSection() {
                   <div className="mr-4 mt-1 text-primary"><MapPin className="h-5 w-5" /></div>
                   <div>
                     <h4 className="font-bold">Address</h4>
-                    <p className="text-gray-300">100 Innovation Drive, Tech Hub, TH 12345</p>
+                    <p className="text-gray-300">IIT Delhi, Hauz Khas, New Delhi,India, 110016</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div className="mr-4 mt-1 text-primary"><Clock className="h-5 w-5" /></div>
                   <div>
                     <h4 className="font-bold">Office Hours</h4>
-                    <p className="text-gray-300">Monday - Friday: 9AM - 5PM</p>
+                    <p className="text-gray-300">Monday - Saturday: 9AM - 7PM</p>
                   </div>
                 </div>
               </div>

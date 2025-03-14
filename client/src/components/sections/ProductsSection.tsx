@@ -161,13 +161,13 @@ export default function ProductsSection() {
               icon: <BookOpen size={24} className="text-primary" />,
               title: "LearningPath",
               description: "An adaptive learning platform that creates personalized educational journeys based on individual learning styles and progress.",
-              timeline: "Coming Q4 2023",
+              timeline: "Coming Q4 2025",
             },
             {
               icon: <Glasses size={24} className="text-primary" />,
               title: "ImmersEd",
               description: "A virtual reality educational platform enabling immersive learning experiences across various subjects from science to history.",
-              timeline: "Coming Q1 2024",
+              timeline: "Coming Q4 2025",
             },
           ].map((item, index) => (
             <motion.div

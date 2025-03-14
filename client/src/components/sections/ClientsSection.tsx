@@ -72,7 +72,7 @@ export default function ClientsSection() {
                 <div className="flex-1 h-px bg-gray-200"></div>
               </div>
               <blockquote className="text-lg text-gray-600 italic mb-6">
-                Zed Tech Lab's VizRec platform has revolutionized how our students develop presentation skills. The real-time feedback and analytics have significantly improved student confidence and performance in public speaking.
+                Zed Tech Lab's VizRec platform has revolutionized how our students develop speaking skills. The real-time feedback and analytics have significantly improved student confidence and performance in public speaking.
               </blockquote>
               <div className="flex items-center">
                 <div className="mr-4">
@@ -81,8 +81,8 @@ export default function ClientsSection() {
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold">Jane Doe</div>
-                  <div className="text-gray-500 text-sm">Director of Educational Technology, Extem Education</div>
+                  <div className="font-bold">Danil KP</div>
+                  <div className="text-gray-500 text-sm">Product Head, Extem Education</div>
                 </div>
               </div>
             </div>
