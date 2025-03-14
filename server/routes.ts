@@ -1,5 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
+import express from "express";
+import path from "path";
 import { storage } from "./storage";
 import { contactFormSchema } from "@shared/schema";
 import { sendContactEmail } from "./nodemailer";
@@ -7,6 +9,9 @@ import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve static files from public directory
+  app.use('/assets', express.static(path.join(process.cwd(), 'public/assets')));
+  
   // API routes
   app.post("/api/contact", async (req: Request, res: Response) => {
     try {
