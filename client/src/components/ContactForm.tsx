@@ -46,51 +46,37 @@ export default function ContactForm() {
 
   
 
-const mutation = useMutation({
-  mutationFn: async (values: FormValues) => {
-    const response = await axios.post(
-      "https://api.resend.com/emails",
-      {
-        from: "no-reply@zedtechlab.com", // Must be a verified domain (see Step 5)
-        to: ["contact@zedtechlab.com", "zedtechlabs@gmail.com"],
-        subject: values.subject,
-        html: `
-          <p><b>Name:</b> ${values.name}</p>
-          <p><b>Email:</b> ${values.email}</p>
-          <p><b>Company:</b> ${values.company || "N/A"}</p>
-          <p><b>Message:</b><br> ${values.message}</p>
-        `,
-      },
-      {
-        headers: {
-          "Authorization": `Bearer ${process.env.REACT_APP_RESEND_API_KEY}`,
-          "Content-Type": "application/json",
-        },
+  const mutation = useMutation({
+    mutationFn: async (values: FormValues) => {
+      const response = await fetch("/api/send-email", { // ✅ Call your own API
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to send message.");
       }
-    );
-
-    if (response.status !== 200) {
-      throw new Error("Failed to send email.");
-    }
-
-    return response.data;
-  },
-  onSuccess: () => {
-    toast({
-      title: "Message sent!",
-      description: "We've received your message and will respond soon.",
-      variant: "default",
-    });
-    form.reset();
-  },
-  onError: (error) => {
-    toast({
-      title: "Error sending message",
-      description: error.message || "Please try again later.",
-      variant: "destructive",
-    });
-  },
-});
+  
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Message sent!",
+        description: "We've received your message and will respond soon.",
+        variant: "default",
+      });
+      form.reset();
+    },
+    onError: (error) => {
+      toast({
+        title: "Error sending message",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+    },
+  });
+  
 
   
   
