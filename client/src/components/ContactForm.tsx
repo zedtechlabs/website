@@ -1,16 +1,10 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { apiRequest } from "@/lib/queryClient";
-import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
-import axios from "axios";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,7 +26,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function ContactForm() {
   const { toast } = useToast();
-  
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,50 +38,18 @@ export default function ContactForm() {
     },
   });
 
-  
-
-  const mutation = useMutation({
-    mutationFn: async (values: FormValues) => {
-      const response = await fetch("/api/send-email", { // ✅ Call your own API
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Failed to send message.");
-      }
-  
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent!",
-        description: "We've received your message and will respond soon.",
-        variant: "default",
-      });
-      form.reset();
-    },
-    onError: (error) => {
-      toast({
-        title: "Error sending message",
-        description: error.message || "Please try again later.",
-        variant: "destructive",
-      });
-    },
-  });
-  
-
-  
-  
-
-  const onSubmit = (values: FormValues) => {
-    mutation.mutate(values);
-  };
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form 
+        action="https://formsubmit.co/zedtechlabs@gmail.com"
+        method="POST"
+        className="space-y-6"
+      >
+        {/* Prevent spam bots */}
+        <input type="hidden" name="_captcha" value="false" />
+        {/* Redirect to the same page after submission */}
+        <input type="hidden" name="_next" value={window.location.href} />
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <FormField
             control={form.control}
@@ -96,7 +58,7 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel>Full Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="John Doe" {...field} />
+                  <Input placeholder="John Doe" required {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,7 +71,7 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel>Email Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="john@example.com" {...field} />
+                  <Input placeholder="john@example.com" required {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,9 +84,9 @@ export default function ContactForm() {
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Institution/Company</FormLabel>
+              <FormLabel>Company</FormLabel>
               <FormControl>
-                <Input placeholder="Your institution or company name" {...field} />
+                <Input placeholder="Your company name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -138,7 +100,7 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="How can we help?" {...field} />
+                <Input placeholder="How can we help?" required {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -153,9 +115,9 @@ export default function ContactForm() {
               <FormLabel>Message</FormLabel>
               <FormControl>
                 <Textarea 
-                  placeholder="Tell us about your needs..." 
-                  className="resize-none" 
+                  placeholder="Your message..." 
                   rows={4}
+                  required
                   {...field} 
                 />
               </FormControl>
@@ -164,19 +126,8 @@ export default function ContactForm() {
           )}
         />
 
-        <Button 
-          type="submit" 
-          className="w-full bg-gradient-to-r from-primary to-primary/70 hover:opacity-90"
-          disabled={mutation.isPending}
-        >
-          {mutation.isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
-              Sending...
-            </>
-          ) : (
-            "Send Message"
-          )}
+        <Button type="submit" className="w-full">
+          Send Message
         </Button>
       </form>
     </Form>
