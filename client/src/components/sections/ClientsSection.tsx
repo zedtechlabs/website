@@ -77,7 +77,7 @@ export default function ClientsSection() {
               <div className="flex items-center">
                 <div className="mr-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <span className="text-primary font-bold">JD</span>
+                    <span className="text-primary font-bold">D</span>
                   </div>
                 </div>
                 <div>
