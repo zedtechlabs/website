@@ -61,7 +61,7 @@ export default function ProductsSection() {
               </div>
               <div className="flex items-center mb-4">
                 <img 
-                  src="/attached_assets/{A4600AD3-BFC3-44D6-BCC8-1F77350FC68D}_1741929125968.png" 
+                  src="/assets/{A4600AD3-BFC3-44D6-BCC8-1F77350FC68D}_1741929125968.png" 
                   alt="VizRec" 
                   className="h-10 w-auto mr-3"
                 />
@@ -121,7 +121,7 @@ export default function ProductsSection() {
                     <div className="flex-1 flex items-center justify-center">
                       <div className="text-white text-center">
                         <img 
-                          src="/attached_assets/{A4600AD3-BFC3-44D6-BCC8-1F77350FC68D}_1741929125968.png" 
+                          src="/assets/{A4600AD3-BFC3-44D6-BCC8-1F77350FC68D}_1741929125968.png" 
                           alt="VizRec" 
                           className="h-20 w-auto mx-auto mb-4"
                         />

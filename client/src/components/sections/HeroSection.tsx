@@ -98,7 +98,7 @@ export default function HeroSection() {
                 className="w-32 h-32 md:w-48 md:h-48 flex items-center justify-center"
               >
                 <img 
-                  src="/attached_assets/logo trans.png" 
+                  src="/assets/logo trans.png" 
                   alt="Zed Tech Lab" 
                   className="w-full h-full object-contain"
                 />

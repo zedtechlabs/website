@@ -6,7 +6,7 @@ export default function Footer() {
           <div className="flex items-center mb-4 md:mb-0">
             <div className="h-10 w-auto mr-3">
               <img 
-                src="/attached_assets/logo trans.png" 
+                src="/assets/logo trans.png" 
                 alt="Zed Tech Lab" 
                 className="h-full w-auto"
               />

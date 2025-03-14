@@ -47,7 +47,7 @@ export default function Header() {
         <Link href="/" className="flex items-center space-x-2">
           <div className="h-10 w-auto">
             <img 
-              src="/attached_assets/logo trans.png" 
+              src="/assets/logo trans.png" 
               alt="Zed Tech Lab" 
               className="h-full w-auto"
             />
