@@ -45,16 +45,23 @@ export default function ContactForm() {
 
   const mutation = useMutation({
     mutationFn: async (values: FormValues) => {
-      const response = await fetch("https://formsubmit.co/contact@zedtechlab.com,zedtechlabs@gmail.com", {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("company", values.company || "N/A");
+      formData.append("subject", values.subject);
+      formData.append("message", values.message);
+  
+      const response = await fetch("https://formsubmit.co/contact@zedtechlab.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: formData,
       });
   
       if (!response.ok) {
         throw new Error("Failed to send message.");
       }
-      return response.json();
+  
+      return response; // No need for `.json()` since FormSubmit doesn't return JSON
     },
     onSuccess: () => {
       toast({
@@ -72,6 +79,7 @@ export default function ContactForm() {
       });
     },
   });
+  
   
 
   const onSubmit = (values: FormValues) => {
