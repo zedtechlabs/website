@@ -18,7 +18,7 @@ export default function HeroSection() {
       <div className="container mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div 
-            className="order-2 lg:order-1"
+            className="order-2 lg:order-1 relative z-10"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -47,7 +47,7 @@ export default function HeroSection() {
               </Button>
             </div>
           </motion.div>
-          <div className="order-1 lg:order-2 relative h-64 md:h-96">
+          <div className="order-1 lg:order-2 relative h-64 md:h-96 z-0">
             {/* Abstract geometric shapes */}
             <motion.div 
               className="absolute w-32 h-32 md:w-40 md:h-40 bg-primary/10 rounded-2xl top-0 left-1/4"
