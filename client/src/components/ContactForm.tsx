@@ -6,6 +6,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import axios from "axios";
 import {
   Form,
   FormControl,
@@ -43,42 +44,54 @@ export default function ContactForm() {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (values: FormValues) => {
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("email", values.email);
-      formData.append("company", values.company || "N/A");
-      formData.append("subject", values.subject);
-      formData.append("message", values.message);
   
-      const response = await fetch("https://formsubmit.co/zedtechlabs@gmail.com,contact@zedtechlab.com", {
-        method: "POST",
-        body: formData,
-      });
-  
-      if (!response.ok) {
-        throw new Error("Failed to send message.");
+
+const mutation = useMutation({
+  mutationFn: async (values: FormValues) => {
+    const response = await axios.post(
+      "https://api.resend.com/emails",
+      {
+        from: "no-reply@zedtechlab.com", // Must be a verified domain (see Step 5)
+        to: ["contact@zedtechlab.com", "zedtechlabs@gmail.com"],
+        subject: values.subject,
+        html: `
+          <p><b>Name:</b> ${values.name}</p>
+          <p><b>Email:</b> ${values.email}</p>
+          <p><b>Company:</b> ${values.company || "N/A"}</p>
+          <p><b>Message:</b><br> ${values.message}</p>
+        `,
+      },
+      {
+        headers: {
+          "Authorization": `Bearer ${process.env.REACT_APP_RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
       }
-  
-      return response; // No need for `.json()` since FormSubmit doesn't return JSON
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent!",
-        description: "We've received your message and will respond soon.",
-        variant: "default",
-      });
-      form.reset();
-    },
-    onError: (error) => {
-      toast({
-        title: "Error sending message",
-        description: error.message || "Please try again later.",
-        variant: "destructive",
-      });
-    },
-  });
+    );
+
+    if (response.status !== 200) {
+      throw new Error("Failed to send email.");
+    }
+
+    return response.data;
+  },
+  onSuccess: () => {
+    toast({
+      title: "Message sent!",
+      description: "We've received your message and will respond soon.",
+      variant: "default",
+    });
+    form.reset();
+  },
+  onError: (error) => {
+    toast({
+      title: "Error sending message",
+      description: error.message || "Please try again later.",
+      variant: "destructive",
+    });
+  },
+});
+
   
   
 
