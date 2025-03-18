@@ -25,19 +25,23 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMobileMenuOpen(false);
-    
-    if (href.startsWith("#")) {
-      const element = document.querySelector(href);
-      if (element) {
-        window.scrollTo({
-          top: element.getBoundingClientRect().top + window.scrollY - 80,
-          behavior: "smooth",
-        });
-      }
+ const handleNavClick = (href: string) => {
+  setMobileMenuOpen(false);
+
+  // Check if the link is an external URL
+  if (href.startsWith("http")) {
+    window.open(href, "_blank"); // Open the external URL in a new tab
+  } else if (href.startsWith("#")) {
+    const element = document.querySelector(href);
+    if (element) {
+      window.scrollTo({
+        top: element.getBoundingClientRect().top + window.scrollY - 80,
+        behavior: "smooth",
+      });
     }
-  };
+  }
+};
+
 
   return (
     <header className={`fixed w-full bg-white/90 backdrop-blur-md z-50 transition-all duration-300 ${
