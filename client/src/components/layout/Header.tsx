@@ -7,7 +7,7 @@ const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Products", href: "#products" },
-  { name: "Games", href: "cognisgames.zedtechlab.com" },
+  { name: "Games", href: "https://cognisgames.zedtechlab.com/" },
   { name: "Clients", href: "#clients" },
   { name: "Contact", href: "#contact" },
 ];
